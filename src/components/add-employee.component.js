@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import EmployeeDataService from "../services/employee.service";
+import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 
 export default class AddEmployee extends Component {
   constructor(props) {
@@ -28,6 +29,8 @@ export default class AddEmployee extends Component {
       position: "",
 
       submitted: false,
+
+      currentUser: AuthService.getCurrentUser(),
     };
   }
 
@@ -91,7 +94,7 @@ export default class AddEmployee extends Component {
       position: this.state.position,
     };
 
-    EmployeeDataService.create(data)
+    UserService.create(data)
       .then((response) => {
         this.setState({
           id: response.data.id,

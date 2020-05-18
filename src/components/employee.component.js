@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import EmployeeDataService from "../services/employee.service";
+import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 
 export default class Employee extends Component {
   constructor(props) {
@@ -14,7 +15,6 @@ export default class Employee extends Component {
     this.onChangePosition = this.onChangePosition.bind(this);
 
     this.getEmployee = this.getEmployee.bind(this);
-    // this.updatePublished = this.updatePublished.bind(this);
     this.updateEmployee = this.updateEmployee.bind(this);
     this.deleteEmployee = this.deleteEmployee.bind(this);
 
@@ -26,11 +26,12 @@ export default class Employee extends Component {
         familyname: "",
         gender: "",
         contactinfo: "",
-        birthday: new Date(),
+        birthday: "",
         salary: 0,
         position: "",
       },
       message: "",
+      currentUser: AuthService.getCurrentUser(),
     };
   }
 
@@ -129,7 +130,7 @@ export default class Employee extends Component {
   }
 
   getEmployee(id) {
-    EmployeeDataService.get(id)
+    UserService.get(id)
       .then((response) => {
         this.setState({
           currentEmployee: response.data,
@@ -142,7 +143,7 @@ export default class Employee extends Component {
   }
 
   updateEmployee() {
-    EmployeeDataService.update(
+    UserService.update(
       this.state.currentEmployee.id,
       this.state.currentEmployee
     )
@@ -158,7 +159,7 @@ export default class Employee extends Component {
   }
 
   deleteEmployee() {
-    EmployeeDataService.delete(this.state.currentEmployee.id)
+    UserService.delete(this.state.currentEmployee.id)
       .then((response) => {
         console.log(response.data);
         this.props.history.push("/employees");

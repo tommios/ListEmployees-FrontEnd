@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import EmployeeDataService from "../services/employee.service";
+import UserService from "../services/user.service";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
+import AuthService from "../services/auth.service";
 
 export default class EmployeesList extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export default class EmployeesList extends Component {
       currentEmployee: null,
       currentIndex: -1,
       searchFirstname: "",
+      currentUser: AuthService.getCurrentUser(),
     };
   }
 
@@ -35,7 +37,7 @@ export default class EmployeesList extends Component {
   }
 
   retrieveEmployees() {
-    EmployeeDataService.getAll()
+    UserService.getAll()
       .then((response) => {
         this.setState({
           employees: response.data,
@@ -63,7 +65,7 @@ export default class EmployeesList extends Component {
   }
 
   removeAllEmployees() {
-    EmployeeDataService.deleteAll()
+    UserService.deleteAll()
       .then((response) => {
         console.log(response.data);
         this.refreshList();
@@ -74,7 +76,7 @@ export default class EmployeesList extends Component {
   }
 
   searchFirstname() {
-    EmployeeDataService.findByFirstName(this.state.searchFirstname)
+    UserService.findByFirstName(this.state.searchFirstname)
       .then((response) => {
         this.setState({
           employees: response.data,
@@ -97,18 +99,18 @@ export default class EmployeesList extends Component {
 
     return (
       <div>
-        <div className="col-md-8">
-          <div className="input-group mb-3">
+        <div className="row justify-content-center">
+          <div className="input-group mb-3 col-md-6">
             <input
               type="text"
-              className="form-control"
+              className="form-control mr-sm-2 "
               placeholder="Search by Firstname"
               value={searchFirstname}
               onChange={this.onChangeSearchFirstname}
             />
             <div className="input-group-append">
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-success my-2 my-sm-0"
                 type="button"
                 onClick={this.searchFirstname}
               >
@@ -167,13 +169,14 @@ export default class EmployeesList extends Component {
                 ))}
             </tbody>
           </table>
-
-          <button
-            className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllEmployees}
-          >
-            Remove All
-          </button>
+          <div className="row justify-content-center">
+            <button
+              className="m-3 btn btn-sm btn-danger"
+              onClick={this.removeAllEmployees}
+            >
+              REMOVE ALL
+            </button>
+          </div>
         </div>
       </div>
     );

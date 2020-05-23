@@ -2,7 +2,15 @@
 
 FrontEnd part of the project ListEmployees.
 
-Link to backend part [ListEmployees-BackEnd](https://github.com/tommios/ListEmployees-BackEnd/tree/dev-jwt-auth)
+Link to BackEnd part [Node.js + MongoDB: User Authentication & Authorization with JWT](https://github.com/tommios/ListEmployees-BackEnd/tree/dev-jwt-auth)
+
+#
+
+Link to FrontEnd part [React.js CRUD to consume Web API](https://github.com/tommios/ListEmployees-FrontEnd/tree/master)
+
+Link to BackEnd part [Node.js Restful API for CRUD operations using Express, Mongoose with MongoDB database](https://github.com/tommios/ListEmployees-BackEnd/tree/master)
+
+#
 
 In the project directory, you can run:
 
